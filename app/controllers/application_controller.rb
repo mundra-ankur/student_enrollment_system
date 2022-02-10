@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
 
+  devise_group :member, contains: %i[admin]
     helper_method :current_user
     # before_action :authorized
     helper_method :logged_in?
