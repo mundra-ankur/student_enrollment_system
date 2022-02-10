@@ -1,6 +1,11 @@
 class StudentsController < ApplicationController
   before_action :set_student, only: %i[ show edit update destroy ]
 
+  # GET /students/login
+  def login
+    @student = Student.new
+  end
+
   # GET /students
   def index
     @students = Student.all
