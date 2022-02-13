@@ -17,7 +17,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link" href="#">Student</a>
+            <%= link_to 'Student', new_student_session_path, class: 'nav-link' %>
           </li>
 
           <li class="nav-item">
@@ -41,6 +41,15 @@
             </li>
             <li class="nav-item">
               <%= link_to 'Sign Out', destroy_instructor_session_path, method: :delete, data: { turbo_method: :delete }, class: 'nav-link' %>
+            </li>
+          <% end %>
+
+          <% if student_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Edit Profile", edit_student_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Sign Out', destroy_student_session_path, method: :delete, data: { turbo_method: :delete }, class: 'nav-link' %>
             </li>
           <% end %>
         <% end %>
