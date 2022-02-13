@@ -12,24 +12,12 @@
             <%= link_to 'Admin', new_admin_session_path, class: 'nav-link' %>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="instructor" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Instructor
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
-              <li><a class="dropdown-item" href="#">Login</a></li>
-              <li><a class="dropdown-item" href="#">Register</a></li>
-            </ul>
+          <li class="nav-item">
+            <%= link_to 'Instructor', new_instructor_session_path, class: 'nav-link' %>
           </li>
 
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="student" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Student
-            </a>
-            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <li><a class="dropdown-item" href="#">Login</a></li>
-              <li><a class="dropdown-item" href="#">Register</a></li>
-            </ul>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Student</a>
           </li>
 
           <li class="nav-item">
@@ -45,6 +33,14 @@
             </li>
             <li class="nav-item">
               <%= link_to 'Sign Out', destroy_admin_session_path, method: :delete, data: { turbo_method: :delete }, class: 'nav-link' %>
+            </li>
+          <% end %>
+          <% if instructor_signed_in? %>
+            <li class="nav-item">
+              <%= link_to "Edit Profile", edit_instructor_registration_path, class: "nav-link" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to 'Sign Out', destroy_instructor_session_path, method: :delete, data: { turbo_method: :delete }, class: 'nav-link' %>
             </li>
           <% end %>
         <% end %>

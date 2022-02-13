@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :admins, controllers: { registrations: 'admins/registrations' }
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
+  get 'instructors/home'
   root 'home#index'
   get 'home/about'
+
+  devise_for :admins, controllers: { registrations: 'admins/registrations' }
+  devise_for :instructors, controllers: { registrations: 'instructors/registrations' }
+
   get '/admins', to: 'admins#home', as: :admin_root
+  get '/instructors', to: 'instructors#home', as: :instructor_root
 end
