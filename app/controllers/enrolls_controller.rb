@@ -27,6 +27,18 @@ class EnrollsController < ApplicationController
     @enroll.student_id = current_student.student_id
     @enroll.course_id = params[:course_id]
 
+    @course = Course.find(params[:course_id])
+
+    if @course[:capacity] <= 0
+      # redirect_to @student, notice: "Course is FULL - Enrollment was not done."
+      render :new, status: :unprocessable_entity
+      return
+    end
+
+    @course[:capacity] -= 1;
+    @course.save
+    puts "course is " + @course[:code] + @course[:name] + " CAPACITY IS " + @course[:capacity].to_s
+
     if @enroll.save
       redirect_to @enroll, notice: "Enroll was successfully created."
     else
@@ -36,6 +48,10 @@ class EnrollsController < ApplicationController
 
   # PATCH/PUT /enrolls/1
   def update
+    @course = Course.find(params[:course_id])
+    @course[:capacity] += 1;
+    @course.save
+    
     if @enroll.update(enroll_params)
       redirect_to @enroll, notice: "Enroll was successfully updated."
     else
