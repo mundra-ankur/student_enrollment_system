@@ -1,6 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container-fluid">
-    <%= link_to 'Home', root_path, class:'navbar-brand' %>
+    <% if admin_signed_in? %>
+      <%= link_to 'Home', admin_root_path, class: 'navbar-brand' %>
+    <% elsif instructor_signed_in? %>
+      <%= link_to 'Home', instructor_root_path, class: 'navbar-brand' %>
+    <% elsif student_signed_in? %>
+      <%= link_to 'Home', student_root_path, class: 'navbar-brand' %>
+    <% else %>
+      <%= link_to 'Home', root_path, class: 'navbar-brand' %>
+    <% end %>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
