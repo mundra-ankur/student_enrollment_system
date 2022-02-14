@@ -35,6 +35,15 @@ class EnrollsController < ApplicationController
       return
     end
 
+    @enrolls = Enroll.all
+    found = Enroll.where(params[:student_id], params[:course_id]).to_s
+    if found != nil
+      puts "===================STUDENT ALREADY ENROLLED======================="
+      render :new, status: :unprocessable_entity
+      return
+    end
+
+
     @course[:capacity] -= 1;
     @course.save
     puts "course is " + @course[:code] + @course[:name] + " CAPACITY IS " + @course[:capacity].to_s
@@ -51,7 +60,7 @@ class EnrollsController < ApplicationController
     @course = Course.find(params[:course_id])
     @course[:capacity] += 1;
     @course.save
-    
+
     if @enroll.update(enroll_params)
       redirect_to @enroll, notice: "Enroll was successfully updated."
     else
