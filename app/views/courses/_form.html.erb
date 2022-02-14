@@ -1,8 +1,6 @@
 <%= form_with(model: course, local: true) do |form| %>
   <% if course.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(course.errors.count, "error") %> prohibited this course from being saved:</h2>
-
       <ul>
         <% course.errors.each do |error| %>
           <li><%= error.full_message %></li>
@@ -10,67 +8,82 @@
       </ul>
     </div>
   <% end %>
-  <div>
-    <%= form.label :code, style: "display: block" %>
-    <%= form.text_field :code, required: true %>
+
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.text_field :code, class:"form-control", placeholder:'Course Code', required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :name, style: "display: block" %>
-    <%= form.text_field :name, required: true %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.text_field :name, class:"form-control", placeholder:'Name', required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :description, style: "display: block" %>
-    <%= form.text_field :description %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.text_field :description, class:"form-control", placeholder:'Description', required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :instructor_name, style: "display: block" %>
-    <%= form.text_field :instructor_name, value: @instructor.name %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.weekday_select :weekday1, { day_format: :abbr_day_names, include_blank: "Weekday 1" }, class:"form-select",required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :weekday1, style: "display: block" %>
-    <%= form.weekday_select :weekday1, { selected: "Monday", day_format: :abbr_day_names } %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.weekday_select :weekday2, {day_format: :abbr_day_names, include_blank: "Weekday 2"}, class:"form-select"%>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :weekday2, style: "display: block" %>
-    <%= form.weekday_select :weekday2, { selected: nil , day_format: :abbr_day_names, include_blank: true } %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.label :start_time %>
+      <%= form.time_field :start_time, class:"form-control", placeholder:'Start Time', required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :start_time, style: "display: block" %>
-    <%= form.time_field :start_time, value: Time.now %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.label :end_time %>
+      <%= form.time_field :end_time, class:"form-control", placeholder:'End Time', required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :end_time, style: "display: block" %>
-    <%= form.time_field :end_time, value: Time.now %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.text_field :room, class:"form-control", placeholder:'Room', required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :capacity, style: "display: block" %>
-    <%= form.number_field :capacity %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.number_field :capacity, class:"form-control", placeholder:'Capacity', required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :waitlist_capacity, style: "display: block" %>
-    <%= form.number_field :waitlist_capacity %>
+  <div class="row mb-3">
+    <div class="col-sm-6">
+      <%= form.number_field :waitlist_capacity, class:"form-control", placeholder:'Waitlist Capacity', required: true %>
+    </div>
   </div>
 
-  <div>
-    <%= form.label :status, style: "display: block" %>
-    <%= form.select :status, %w[OPEN CLOSED WAITLIST] %>
-  </div>
+  <% if admin_signed_in? %>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <%= form.text_field :instructor_name, class:"form-control", placeholder:'Instructor Name', required: true %>
+      </div>
+    </div>
+  <% else %>
+    <div class="row mb-3">
+      <div class="col-sm-6">
+        <%= form.text_field :instructor_name, class:"form-control", placeholder:'Instructor Name', value: @instructor.name, hidden: true %>
+      </div>
+    </div>
+  <% end %>
 
-  <div>
-    <%= form.label :room, style: "display: block" %>
-    <%= form.text_field :room %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <%= form.submit class:'btn btn-secondary' %>
 <% end %>

@@ -1,6 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[ show edit update destroy ]
-  before_action :authenticate_instructor!, only: %i[new edit destroy update]
+  before_action :authenticate_instructor!, except: %i[show]
 
   # GET /courses
   def index
@@ -56,7 +56,10 @@ class CoursesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_course
-      @course = Course.find(params[:id])
+      @course = Course.find_by_code(params[:id])
+      if @course.nil?
+        redirect_to courses_url, notice: "Course #{params[:id]} not there!"
+      end
     end
 
     # Only allow a list of trusted parameters through.
