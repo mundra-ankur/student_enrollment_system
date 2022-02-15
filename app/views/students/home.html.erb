@@ -22,7 +22,7 @@
       <td><%= course.capacity %></td>
       <td><%= course.waitlist_capacity %></td>
       <td><%= button_to 'Enroll in Course', enrolls_path(:student_id => @student.id, :course_id => course.code), method: :post, class:'btn btn-outline-primary'%></td>
-      <td><%= button_to 'Unenroll from Course', Enroll.where(:student_id => @student.id, :course_id => course.code).first, method: :delete, class:'btn btn-outline-danger btn-sm'%></td>
+      <td><%= button_to 'Drop Course', Enroll.where(:student_id => @student.id, :course_id => course.code).first, method: :delete, class:'btn btn-outline-danger btn-sm'%></td>
     </tr>
   <% end %>
   </tbody>
@@ -52,7 +52,7 @@
       <td><%= course.status %></td>
       <td><%= course.capacity %></td>
       <td><%= course.waitlist_capacity %></td>
-  <td><%= button_to 'Unenroll from Course', Enroll.where(:student_id => @student.id, :course_id => course.code).first, method: :delete, class:'btn btn-outline-danger btn-sm'%></td>
+  <td><%= button_to 'Drop Course', Enroll.where(:student_id => @student.id, :course_id => course.code).first, method: :delete, class:'btn btn-outline-danger btn-sm'%></td>
     </tr>
   <% end %>
   </tbody>

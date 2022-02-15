@@ -50,6 +50,9 @@ class EnrollsController < ApplicationController
     end
 
     @course[:capacity] -= 1;
+    if(@course[:capacity] == 0)
+      @course[:status] = "CLOSED"
+    end
     @course.save
     puts "course is " + @course[:code] + @course[:name] + " CAPACITY IS " + @course[:capacity].to_s + " STATUS IS " + @course[:status]
 
@@ -85,6 +88,7 @@ class EnrollsController < ApplicationController
     @course = Course.find(@enroll[:course_id])
     @course[:capacity] += 1;
     @course.save
+
     @enroll.destroy
     redirect_to enrolls_url, notice: "Enroll was successfully destroyed."
   end
