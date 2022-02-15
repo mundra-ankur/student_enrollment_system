@@ -10,42 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_14_043239) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_15_180607) do
   # These are extensions that must be enabled in order to support this database
-  enable_extension "plpgsql"
+  enable_extension 'plpgsql'
 
-  create_table "admins", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "name"
-    t.string "phone"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_admins_on_email", unique: true
-    t.index ["phone"], name: "index_admins_on_phone", unique: true
-    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  create_table 'admins', force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.string 'name'
+    t.string 'phone'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['email'], name: 'index_admins_on_email', unique: true
+    t.index ['phone'], name: 'index_admins_on_phone', unique: true
+    t.index ['reset_password_token'], name: 'index_admins_on_reset_password_token', unique: true
   end
 
-  create_table "courses", primary_key: "code", id: :string, force: :cascade do |t|
-    t.string "name"
-    t.string "description"
-    t.string "instructor_name"
-    t.string "weekday1"
-    t.string "weekday2"
-    t.time "start_time"
-    t.time "end_time"
-    t.integer "capacity"
-    t.integer "waitlist_capacity"
-    t.string "status"
-    t.string "room"
-    t.bigint "instructor_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["code"], name: "index_courses_on_code", unique: true
-    t.index ["instructor_id"], name: "index_courses_on_instructor_id"
+  create_table 'courses', primary_key: 'code', id: :string, force: :cascade do |t|
+    t.string 'name'
+    t.string 'description'
+    t.string 'instructor_name'
+    t.string 'weekday1'
+    t.string 'weekday2'
+    t.time 'start_time'
+    t.time 'end_time'
+    t.integer 'capacity'
+    t.integer 'waitlist_capacity'
+    t.string 'status', default: 'OPEN'
+    t.string 'room'
+    t.bigint 'instructor_id', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['code'], name: 'index_courses_on_code', unique: true
+    t.index ['instructor_id'], name: 'index_courses_on_instructor_id'
   end
 
   create_table "enrolls", force: :cascade do |t|
@@ -55,35 +55,36 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_14_043239) do
     t.string "student_id"
   end
 
-  create_table "instructors", force: :cascade do |t|
-    t.string "name"
-    t.string "department"
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_instructors_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_instructors_on_reset_password_token", unique: true
+  create_table 'instructors', force: :cascade do |t|
+    t.string 'name'
+    t.string 'department'
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['email'], name: 'index_instructors_on_email', unique: true
+    t.index ['name'], name: 'index_instructors_on_name', unique: true
+    t.index ['reset_password_token'], name: 'index_instructors_on_reset_password_token', unique: true
   end
 
-  create_table "students", primary_key: "student_id", id: :string, force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.string "name", null: false
-    t.date "dob", null: false
-    t.string "phone", null: false
-    t.string "major", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["email"], name: "index_students_on_email", unique: true
-    t.index ["phone"], name: "index_students_on_phone", unique: true
-    t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
+  create_table 'students', primary_key: 'student_id', id: :string, force: :cascade do |t|
+    t.string 'email', default: '', null: false
+    t.string 'encrypted_password', default: '', null: false
+    t.string 'reset_password_token'
+    t.datetime 'reset_password_sent_at'
+    t.datetime 'remember_created_at'
+    t.string 'name', null: false
+    t.date 'dob', null: false
+    t.string 'phone', null: false
+    t.string 'major', null: false
+    t.datetime 'created_at', null: false
+    t.datetime 'updated_at', null: false
+    t.index ['email'], name: 'index_students_on_email', unique: true
+    t.index ['phone'], name: 'index_students_on_phone', unique: true
+    t.index ['reset_password_token'], name: 'index_students_on_reset_password_token', unique: true
   end
 
   add_foreign_key "courses", "instructors"

@@ -1,10 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<div class="card" style="width: 24rem;">
+  <div class="card-body">
+    <h5 class="card-title"><%= @course.code %> | <%= @course.name%></h5>
+    <p class="card-text"><%= @course.description%></p>
+  </div>
 
-<%= render @course %>
+  <ul class="list-group list-group-flush">
+    <li class="list-group-item"><strong>Instructor:</strong> <%= @course.instructor_name %></li>
+    <li class="list-group-item"><strong>Room:</strong> <%= @course.room %></li>
+    <li class="list-group-item"><strong>Schedule:</strong> <%= @course.formatted_start_time %> - <%= @course.formatted_end_time %>,
+      <%= @course.weekday1 %> <%= @course.weekday2 %></li>
+    <li class="list-group-item"><strong>Status:</strong> <%= @course.status %></li>
+    <li class="list-group-item"><strong>Available Seats:</strong> <%= @course.capacity %></li>
+    <li class="list-group-item"><strong>WaitList Capacity:</strong> <%= @course.waitlist_capacity %></li>
+  </ul>
 
-<div>
-  <%= link_to "Edit this course", edit_course_path(@course) %> |
-  <%= link_to "Back to courses", courses_path %>
-
-  <%= button_to "Destroy this course", @course, method: :delete %>
+  <div class="card-body">
+    <%= render "courses/links" %>
+  </div>
 </div>
