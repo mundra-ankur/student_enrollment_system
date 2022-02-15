@@ -6,4 +6,8 @@ class AdminsController < ApplicationController
   def instructors
     @instructors = Instructor.all
   end
+
+  def courses
+    @courses = Course.all
+  end
 end

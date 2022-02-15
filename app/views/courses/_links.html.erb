@@ -1,5 +1,5 @@
 <% if admin_signed_in? %>
-  <%= link_to "Back", admin_root_path, class:'btn btn-dark' %>
+  <%= link_to "Back", admin_courses_path, class: 'btn btn-dark' %>
 <% elsif instructor_signed_in? %>
   <%= link_to "Back", instructor_root_path,class:'btn btn-dark' %>
 <% elsif student_signed_in?%>
