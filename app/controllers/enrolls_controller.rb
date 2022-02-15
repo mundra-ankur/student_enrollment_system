@@ -22,7 +22,7 @@ class EnrollsController < ApplicationController
 
   # POST /enrolls
   def create
-    debugger
+    # debugger
     @enroll = Enroll.new()
     @enroll.student_id = current_student.student_id
     @enroll.course_id = params[:course_id]
@@ -36,7 +36,8 @@ class EnrollsController < ApplicationController
       return
     elsif @course[:status] == "closed"
       puts "===================Course is CLOSED - Enrollment was not done======================="
-      render :new, status: :unprocessable_entity
+      # render :new, status: :unprocessable_entity
+      redirect_to students_home_path, notice: "Course is CLOSED - Enrollment was not done."
       return
     end
 
@@ -44,7 +45,7 @@ class EnrollsController < ApplicationController
     found = Enroll.where(student_id: params[:student_id], course_id: params[:course_id])
     if found != []
       puts "===================STUDENT ALREADY ENROLLED======================="
-      render :new, status: :unprocessable_entity
+      redirect_to students_home_path, notice: "STUDENT ALREADY ENROLLED."
       return
     end
 
@@ -74,15 +75,15 @@ class EnrollsController < ApplicationController
 
   # DELETE /enrolls/1
   def destroy
-    debugger
+    # debugger
     puts @enroll
     if @enroll == nil
       puts "===================STUDENT NOT ENROLLED======================="
-      render :new, status: :unprocessable_entity
+      redirect_to students_home_path, notice: "STUDENT NOT ENROLLED."
       return
     end
     @course = Course.find(@enroll[:course_id])
-    @course[:capacity] -= 1;
+    @course[:capacity] += 1;
     @course.save
     @enroll.destroy
     redirect_to enrolls_url, notice: "Enroll was successfully destroyed."
