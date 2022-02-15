@@ -19,3 +19,4 @@ Rails.application.routes.draw do
   get 'admins/courses', to: 'admins#courses', as: :admin_courses
   resources :courses
   resources :enrolls
+end
