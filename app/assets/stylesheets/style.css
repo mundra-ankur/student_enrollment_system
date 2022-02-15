@@ -81,7 +81,7 @@
 }
 
 .link-tiles a:after {
-    font-family: FontAwesome;
+    font-family: FontAwesome, ui-serif;
     content: "\f0c1";
     top: 42%;
     right: 30px;

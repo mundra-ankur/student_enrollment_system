@@ -19,5 +19,6 @@ Rails.application.routes.draw do
   get '/students', to: 'students#home', as: :student_root
   get '/instructors', to: 'instructors#index', as: :instructor_root
   get 'admins/instructors', to: 'admins#instructors', as: :admin_instructors
+  get 'admins/courses', to: 'admins#courses', as: :admin_courses
   resources :courses
 end
