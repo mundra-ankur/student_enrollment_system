@@ -3,9 +3,6 @@ Rails.application.routes.draw do
   # Defines the root path route ("/")
   root 'home#index'
   get 'home/about'
-  # get 'instructors/index'
-  # get 'admins/index'
-  # get 'students/home'
 
   devise_for :admins, controllers: { registrations: 'admins/registrations' }
   devise_for :instructors, controllers: { registrations: 'instructors/registrations' }
@@ -21,4 +18,4 @@ Rails.application.routes.draw do
   get 'admins/instructors', to: 'admins#instructors', as: :admin_instructors
   get 'admins/courses', to: 'admins#courses', as: :admin_courses
   resources :courses
-end
+  resources :enrolls
