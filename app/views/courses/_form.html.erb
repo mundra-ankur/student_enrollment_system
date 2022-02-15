@@ -23,26 +23,28 @@
 
   <div class="row mb-3">
     <div class="col-sm-6">
-      <%= form.text_field :description, class:"form-control", placeholder:'Description', required: true %>
+      <%= form.text_field :description, class: "form-control", placeholder: 'Description', required: true %>
     </div>
   </div>
 
   <div class="row mb-3">
     <div class="col-sm-6">
-      <%= form.weekday_select :weekday1, { day_format: :abbr_day_names, include_blank: "Weekday 1" }, class:"form-select",required: true %>
+      <% options = %w[MON TUE WED THU FRI] %>
+      <%= form.select :weekday1, options, { include_blank: "Weekday 1" }, class: "form-select", required: true %>
     </div>
   </div>
 
   <div class="row mb-3">
     <div class="col-sm-6">
-      <%= form.weekday_select :weekday2, {day_format: :abbr_day_names, include_blank: "Weekday 2"}, class:"form-select"%>
+      <% options = %w[MON TUE WED THU FRI] %>
+      <%= form.select :weekday2, options, { include_blank: "Weekday 2" }, class: "form-select" %>
     </div>
   </div>
 
   <div class="row mb-3">
     <div class="col-sm-6">
       <%= form.label :start_time %>
-      <%= form.time_field :start_time, class:"form-control", placeholder:'Start Time', required: true %>
+      <%= form.time_field :start_time, class: "form-control", placeholder: 'Start Time', required: true %>
     </div>
   </div>
 
@@ -67,23 +69,23 @@
 
   <div class="row mb-3">
     <div class="col-sm-6">
-      <%= form.number_field :waitlist_capacity, class:"form-control", placeholder:'Waitlist Capacity', required: true %>
+      <%= form.number_field :waitlist_capacity, class: "form-control", placeholder: 'Waitlist Capacity', required: true %>
     </div>
   </div>
 
   <% if admin_signed_in? %>
     <div class="row mb-3">
       <div class="col-sm-6">
-        <%= form.text_field :instructor_name, class:"form-control", placeholder:'Instructor Name', required: true %>
+        <% options = options_from_collection_for_select(@instructors, 'id', 'name', selected = @course.instructor_id) %>
+        <%= form.select :instructor_id, options, { include_blank: "Instructor" }, class: "form-select", required: true %>
       </div>
     </div>
   <% else %>
     <div class="row mb-3">
       <div class="col-sm-6">
-        <%= form.text_field :instructor_name, class:"form-control", placeholder:'Instructor Name', value: @instructor.name, hidden: true %>
+        <%= form.text_field :instructor_name, class: "form-control", placeholder: 'Instructor', value: @instructor.name, hidden: true %>
       </div>
     </div>
   <% end %>
-
-  <%= form.submit class:'btn btn-secondary' %>
+  <%= form.submit class: 'btn btn-secondary' %>
 <% end %>
