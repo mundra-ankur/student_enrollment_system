@@ -33,12 +33,16 @@ class EnrollsController < ApplicationController
       # redirect_to @student, notice: "Course is FULL - Enrollment was not done."
       render :new, status: :unprocessable_entity
       return
+    elsif @course[:status] == "closed"
+      render :new, status: :unprocessable_entity
+      return
     end
 
     @enrolls = Enroll.all
-    found = Enroll.where(params[:student_id], params[:course_id]).to_s
-    if found != nil
+    found = Enroll.where(student_id: params[:student_id], course_id: params[:course_id])
+    if found != []
       puts "===================STUDENT ALREADY ENROLLED======================="
+      puts found
       render :new, status: :unprocessable_entity
       return
     end
@@ -46,7 +50,7 @@ class EnrollsController < ApplicationController
 
     @course[:capacity] -= 1;
     @course.save
-    puts "course is " + @course[:code] + @course[:name] + " CAPACITY IS " + @course[:capacity].to_s
+    puts "course is " + @course[:code] + @course[:name] + " CAPACITY IS " + @course[:capacity].to_s + " STATUS IS " + @course[:status]
 
     if @enroll.save
       redirect_to @enroll, notice: "Enroll was successfully created."
