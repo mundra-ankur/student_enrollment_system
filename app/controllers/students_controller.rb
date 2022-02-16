@@ -10,8 +10,8 @@ class StudentsController < ApplicationController
     else
       enrolled_course_codes = Enroll.where(student_id: @student.student_id).pluck(:course_id)
       @courses = Course.where.not(code: enrolled_course_codes)
-      @enrolled_courses = Course.where(code: Enroll.where(student_id: current_student.id, waitlist: nil).pluck(:course_id))
-      @waitlistedcourses = Course.where(code: Enroll.where(student_id: current_student.id, waitlist: "TRUE").pluck(:course_id))
+      @enrolled_courses = Course.where(code: Enroll.where(student_id: @student[:id], waitlist: nil).pluck(:course_id))
+      @waitlistedcourses = Course.where(code: Enroll.where(student_id: @student[:id], waitlist: "TRUE").pluck(:course_id))
     end
   end
 
