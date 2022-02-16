@@ -8,7 +8,7 @@
       <th scope="col">Email</th>
       <th scope="col">Phone</th>
       <th scope="col">Major</th>
-      <th colspan="3"></th>
+      <th colspan="1"></th>
     </tr>
     </thead>
     <tbody>
@@ -20,18 +20,11 @@
         <td><%= student.email %></td>
         <td><%= student.phone %></td>
         <td><%= student.major %></td>
-        <td><%= link_to 'Enroll', student_root_path(id: student.student_id), class: 'btn btn-outline-success' %></td>
-        <td><%= link_to 'Edit', edit_student_path(student), class: 'btn btn-outline-info' %></td>
-        <td><%= link_to 'Delete', student, method: :delete,
-                        data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                        class: 'btn btn-outline-danger btn-sm' %></td>
+        <td><%= button_to 'Enroll', enrolls_path(student_id: student.id, course_id: @course.code),
+                          method: :post, class: 'btn btn-outline-success' %></td>
       </tr>
     <% end %>
     </tbody>
   </table>
 </div>
-<br>
-<div>
-  <%= link_to "New student", new_student_path, class: 'btn btn-secondary' %>
-  <%= link_to 'Back', admin_root_path, class: 'btn btn-dark' %>
-</div>
+<%= link_to 'Back', instructor_root_path, class: 'btn btn-dark' %>

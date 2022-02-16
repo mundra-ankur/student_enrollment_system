@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show edit update destroy]
-  before_action :authenticate_instructor?, except: %i[index show]
+  before_action :set_course, only: %i[show edit update destroy enrolled enroll]
+  before_action :authenticate_instructor?
 
   # GET /courses
   def index
@@ -12,6 +12,16 @@ class CoursesController < ApplicationController
                else
                  Course.all
                end
+  end
+
+  def enrolled
+    course_enrolled_students = Enroll.where(course_id: params[:id]).pluck(:student_id)
+    @enrolled_students = Student.where(student_id: course_enrolled_students)
+  end
+
+  def enroll
+    course_enrolled_students = Enroll.where(course_id: params[:id]).pluck(:student_id)
+    @students = Student.where.not(student_id: course_enrolled_students)
   end
 
   # GET /courses/1

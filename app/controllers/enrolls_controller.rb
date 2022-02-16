@@ -1,6 +1,6 @@
 class EnrollsController < ApplicationController
   before_action :set_enroll, only: %i[show edit update destroy]
-
+  before_action :authenticate_member!
   # GET /enrolls
   def index
     @enrolls = Enroll.all
@@ -17,14 +17,12 @@ class EnrollsController < ApplicationController
   end
 
   # GET /enrolls/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /enrolls
   def create
     @enroll = Enroll.new
     # @enroll.student_id = current_student.student_id || params[:id]
-    puts "Collllllll ----->>>>>>>> #{params}"
     @enroll.student = current_student || Student.find_by(student_id: params[:student_id])
     @enroll.course_id = params[:course_id]
 
@@ -51,9 +49,7 @@ class EnrollsController < ApplicationController
     end
 
     @course[:capacity] -= 1
-    if (@course[:capacity]).zero?
-      @course[:status] = 'CLOSED'
-    end
+    @course[:status] = 'CLOSED' if (@course[:capacity]).zero?
     @course.save
     puts "course is #{@course[:code]}#{@course[:name]} CAPACITY IS #{@course[:capacity]} STATUS IS #{@course[:status]}"
 
