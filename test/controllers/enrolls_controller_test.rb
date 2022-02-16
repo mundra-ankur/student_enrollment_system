@@ -23,7 +23,7 @@ class EnrollsControllerTest < ActionDispatch::IntegrationTest
     assert_redirected_to enroll_url(Enroll.last)
   end
 
-  test "should show enroll" do
+  test "should new enroll" do
     get enroll_url(@enroll)
     assert_response :success
   end

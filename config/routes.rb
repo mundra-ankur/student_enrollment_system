@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-
   # Defines the root path route ("/")
   root 'home#index'
   get 'home/about'
@@ -13,10 +12,11 @@ Rails.application.routes.draw do
   end
 
   get '/admins', to: 'admins#index', as: :admin_root
-  get '/students', to: 'students#home', as: :student_root
+  get '/students', to: 'students#index', as: :student_root
   get '/instructors', to: 'instructors#index', as: :instructor_root
   get 'admins/instructors', to: 'admins#instructors', as: :admin_instructors
   get 'admins/courses', to: 'admins#courses', as: :admin_courses
+  get 'admins/students', to: 'admins#students', as: :admin_students
   resources :courses
   resources :enrolls
 end
