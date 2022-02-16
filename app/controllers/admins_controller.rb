@@ -10,4 +10,8 @@ class AdminsController < ApplicationController
   def courses
     @courses = Course.all
   end
+
+  def students
+    @students = Student.all
+  end
 end

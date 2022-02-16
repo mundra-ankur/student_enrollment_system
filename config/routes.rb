@@ -18,5 +18,6 @@ Rails.application.routes.draw do
   get 'admins/courses', to: 'admins#courses', as: :admin_courses
   get 'admins/students', to: 'admins#students', as: :admin_students
   resources :courses
-  resources :enrolls
+  resources :enrolls, only: %i[create destroy]
+  resources :students, except: [:show]
 end

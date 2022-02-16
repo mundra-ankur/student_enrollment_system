@@ -8,44 +8,44 @@
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.text_field :student_id, class:"form-control", placeholder:'Student Id' %>
+          <%= f.text_field :student_id, class: "form-control", placeholder: 'Student Id', required: true %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.text_field :name, class:"form-control", placeholder:'Name' %>
+          <%= f.text_field :name, class: "form-control", placeholder: 'Name', required: true %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-sm-6">
           Date Of Birth<br/>
-          <%= f.date_field :dob, class:"form-control", placeholder:'Date Of Birth'%>
+          <%= f.date_field :dob, class: "form-control", placeholder: 'Date Of Birth', required: true %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.text_field :major, class:"form-control", placeholder:'Major' %>
+          <%= f.text_field :major, class: "form-control", placeholder: 'Major', required: true %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.text_field :email, class:"form-control", placeholder:'Email' %>
+          <%= f.text_field :email, class: "form-control", placeholder: 'Email', required: true %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.text_field :phone, class:"form-control", placeholder:'Phone' %>
+          <%= f.text_field :phone, class: "form-control", placeholder: 'Phone', required: true %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.password_field :password, class:"form-control", placeholder:'Password' %>
+          <%= f.password_field :password, class: "form-control", placeholder: 'Password', required: true %>
           <% if @minimum_password_length %>
             <em>(<%= @minimum_password_length %> characters minimum)</em>
           <% end %>
@@ -54,7 +54,7 @@
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.password_field :password_confirmation, class:"form-control", placeholder:'Password Confirmation' %>
+          <%= f.password_field :password_confirmation, class: "form-control", placeholder: 'Password Confirmation', required: true %>
         </div>
       </div>
 

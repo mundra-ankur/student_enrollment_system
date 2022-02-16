@@ -32,9 +32,6 @@
             <%= link_to 'About Us', home_about_path, class: 'nav-link' %>
           </li>
         <% else %>
-          <li class="nav-item">
-            <%= link_to 'About Us', home_about_path, class: 'nav-link' %>
-          </li>
           <% if admin_signed_in? %>
             <li class="nav-item">
               <%= link_to "Edit Profile", edit_admin_registration_path, class: "nav-link" %>

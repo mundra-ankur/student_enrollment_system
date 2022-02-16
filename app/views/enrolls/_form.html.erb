@@ -1,8 +1,6 @@
 <%= form_with(model: enroll) do |form| %>
   <% if enroll.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(enroll.errors.count, "error") %> prohibited this enroll from being saved:</h2>
-
       <ul>
         <% enroll.errors.each do |error| %>
           <li><%= error.full_message %></li>
