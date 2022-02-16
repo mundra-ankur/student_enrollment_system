@@ -1,6 +1,7 @@
 class Course < ApplicationRecord
   belongs_to :instructor
   has_many :enrolls, dependent: :delete_all
+  has_many :students, through: :enrolls
   validates :code, presence: true, uniqueness: true
   validates :weekday1, presence: true, comparison: { other_than: :weekday2 }
   validates :start_time, presence: true

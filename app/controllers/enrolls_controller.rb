@@ -22,8 +22,7 @@ class EnrollsController < ApplicationController
 
   # POST /enrolls
   def create
-    # debugger
-    @enroll = Enroll.new()
+    @enroll = Enroll.new
     @enroll.student_id = current_student.student_id
     @enroll.course_id = params[:course_id]
 
@@ -32,12 +31,12 @@ class EnrollsController < ApplicationController
       # redirect_to @student, notice: "Course is FULL - Enrollment was not done."
       puts "===================Course is FULL - Enrollment was not done======================="
       # render :new, status: :unprocessable_entity
-      redirect_to students_home_path, notice: "Course is FULL - Enrollment was not done."
+      redirect_to student_root_path, notice: "Course is FULL - Enrollment was not done."
       return
     elsif @course[:status] == "closed"
       puts "===================Course is CLOSED - Enrollment was not done======================="
       # render :new, status: :unprocessable_entity
-      redirect_to students_home_path, notice: "Course is CLOSED - Enrollment was not done."
+      redirect_to student_root_path, notice: "Course is CLOSED - Enrollment was not done."
       return
     end
 
@@ -45,19 +44,19 @@ class EnrollsController < ApplicationController
     found = Enroll.where(student_id: params[:student_id], course_id: params[:course_id])
     if found != []
       puts "===================STUDENT ALREADY ENROLLED======================="
-      redirect_to students_home_path, notice: "STUDENT ALREADY ENROLLED."
+      redirect_to student_root_path, notice: "STUDENT ALREADY ENROLLED."
       return
     end
 
-    @course[:capacity] -= 1;
-    if(@course[:capacity] == 0)
+    @course[:capacity] -= 1
+    if @course[:capacity] == 0
       @course[:status] = "CLOSED"
     end
     @course.save
     puts "course is " + @course[:code] + @course[:name] + " CAPACITY IS " + @course[:capacity].to_s + " STATUS IS " + @course[:status]
 
     if @enroll.save
-      redirect_to @enroll, notice: "Enroll was successfully created."
+      redirect_to student_root_path, notice: "Successfully enrolled in #{@course.name}!"
     else
       render :new, status: :unprocessable_entity
     end
@@ -66,7 +65,7 @@ class EnrollsController < ApplicationController
   # PATCH/PUT /enrolls/1
   def update
     @course = Course.find(params[:course_id])
-    @course[:capacity] += 1;
+    @course[:capacity] += 1
     @course.save
 
     if @enroll.update(enroll_params)
@@ -78,19 +77,17 @@ class EnrollsController < ApplicationController
 
   # DELETE /enrolls/1
   def destroy
-    # debugger
-    puts @enroll
-    if @enroll == nil
+    if @enroll.nil?
       puts "===================STUDENT NOT ENROLLED======================="
-      redirect_to students_home_path, notice: "STUDENT NOT ENROLLED."
+      redirect_to student_root_path, notice: "STUDENT NOT ENROLLED."
       return
     end
     @course = Course.find(@enroll[:course_id])
-    @course[:capacity] += 1;
+    @course[:capacity] += 1
     @course.save
 
     @enroll.destroy
-    redirect_to enrolls_url, notice: "Enroll was successfully destroyed."
+    redirect_to enrolls_url, notice: "#{@course.name} is dropped!"
   end
 
   private
