@@ -14,13 +14,13 @@
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.text_field :name, class:"form-control", placeholder:'Name' %>
+          <%= f.text_field :name, class: "form-control", placeholder: 'Name', required: true %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.date_field :dob, class:"form-control", placeholder:'Date Of Birth' %>
+          <%= f.date_field :dob, class: "form-control", placeholder: 'Date Of Birth', required: true %>
         </div>
       </div>
 
@@ -38,14 +38,14 @@
 
       <div class="row mb-3">
         <div class="col-sm-6">
-          <%= f.text_field :phone, class:"form-control", placeholder:'Phone' %>
+          <%= f.text_field :phone, class: "form-control", placeholder: 'Phone', required: true %>
         </div>
       </div>
 
       <div class="row mb-3">
         <div class="col-sm-6">
           <%= f.label :current_password %> <i>(Need current password to confirm your changes)</i><br/>
-          <%= f.password_field :current_password, autofocus: true, class: "form-control", placeholder: 'Current Password' %>
+          <%= f.password_field :current_password, autofocus: true, class: "form-control", placeholder: 'Current Password', required: true %>
         </div>
       </div>
 

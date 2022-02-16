@@ -1,5 +1,5 @@
 class EnrollsController < ApplicationController
-  before_action :set_enroll, only: %i[ show edit update destroy ]
+  before_action :set_enroll, only: %i[show edit update destroy]
 
   # GET /enrolls
   def index
@@ -23,40 +23,46 @@ class EnrollsController < ApplicationController
   # POST /enrolls
   def create
     @enroll = Enroll.new
-    @enroll.student_id = current_student.student_id
+    # @enroll.student_id = current_student.student_id || params[:id]
+    puts "Collllllll ----->>>>>>>> #{params}"
+    @enroll.student = current_student || Student.find_by(student_id: params[:student_id])
     @enroll.course_id = params[:course_id]
 
     @course = Course.find(params[:course_id])
     if @course[:capacity] <= 0
       # redirect_to @student, notice: "Course is FULL - Enrollment was not done."
-      puts "===================Course is FULL - Enrollment was not done======================="
+      puts '===================Course is FULL - Enrollment was not done======================='
       # render :new, status: :unprocessable_entity
-      redirect_to student_root_path, notice: "Course is FULL - Enrollment was not done."
+      redirect_to student_root_path, notice: 'Course is FULL - Enrollment was not done.'
       return
-    elsif @course[:status] == "closed"
-      puts "===================Course is CLOSED - Enrollment was not done======================="
+    elsif @course[:status] == 'closed'
+      puts '===================Course is CLOSED - Enrollment was not done======================='
       # render :new, status: :unprocessable_entity
-      redirect_to student_root_path, notice: "Course is CLOSED - Enrollment was not done."
+      redirect_to student_root_path, notice: 'Course is CLOSED - Enrollment was not done.'
       return
     end
 
     @enrolls = Enroll.all
     found = Enroll.where(student_id: params[:student_id], course_id: params[:course_id])
     if found != []
-      puts "===================STUDENT ALREADY ENROLLED======================="
-      redirect_to student_root_path, notice: "STUDENT ALREADY ENROLLED."
+      puts '===================STUDENT ALREADY ENROLLED======================='
+      redirect_to student_root_path, notice: 'STUDENT ALREADY ENROLLED.'
       return
     end
 
     @course[:capacity] -= 1
-    if @course[:capacity] == 0
-      @course[:status] = "CLOSED"
+    if (@course[:capacity]).zero?
+      @course[:status] = 'CLOSED'
     end
     @course.save
-    puts "course is " + @course[:code] + @course[:name] + " CAPACITY IS " + @course[:capacity].to_s + " STATUS IS " + @course[:status]
+    puts "course is #{@course[:code]}#{@course[:name]} CAPACITY IS #{@course[:capacity]} STATUS IS #{@course[:status]}"
 
     if @enroll.save
-      redirect_to student_root_path, notice: "Successfully enrolled in #{@course.name}!"
+      if admin_signed_in?
+        redirect_back fallback_location: admin_students_path, notice: "Successfully enrolled in #{@course.name}!"
+      else
+        redirect_back fallback_location: student_root_path, notice: "Successfully enrolled in #{@course.name}!"
+      end
     else
       render :new, status: :unprocessable_entity
     end
@@ -69,7 +75,7 @@ class EnrollsController < ApplicationController
     @course.save
 
     if @enroll.update(enroll_params)
-      redirect_to @enroll, notice: "Enroll was successfully updated."
+      redirect_to @enroll, notice: 'Enroll was successfully updated.'
     else
       render :edit, status: :unprocessable_entity
     end
@@ -78,8 +84,8 @@ class EnrollsController < ApplicationController
   # DELETE /enrolls/1
   def destroy
     if @enroll.nil?
-      puts "===================STUDENT NOT ENROLLED======================="
-      redirect_to student_root_path, notice: "STUDENT NOT ENROLLED."
+      puts '===================STUDENT NOT ENROLLED======================='
+      redirect_to student_root_path, notice: 'STUDENT NOT ENROLLED.'
       return
     end
     @course = Course.find(@enroll[:course_id])
@@ -87,17 +93,22 @@ class EnrollsController < ApplicationController
     @course.save
 
     @enroll.destroy
-    redirect_to enrolls_url, notice: "#{@course.name} is dropped!"
+    if admin_signed_in?
+      redirect_to admin_students_url, notice: "#{@course.name} is dropped!"
+    else
+      redirect_to enrolls_url, notice: "#{@course.name} is dropped!"
+    end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_enroll
-      @enroll = Enroll.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    #   def enroll_params
-    #     params.require(:enroll).permit(:student_id, :course_id)
-    #   end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_enroll
+    @enroll = Enroll.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  #   def enroll_params
+  #     params.require(:enroll).permit(:student_id, :course_id)
+  #   end
 end
