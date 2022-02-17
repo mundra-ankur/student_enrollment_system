@@ -1,5 +1,6 @@
 class EnrollsController < ApplicationController
   before_action :set_enroll, only: %i[show edit update destroy]
+  before_action :authenticate_member!
 
   # GET /enrolls
   def index
@@ -24,7 +25,6 @@ class EnrollsController < ApplicationController
   def create
     @enroll = Enroll.new
     # @enroll.student_id = current_student.student_id || params[:id]
-    puts "Collllllll ----->>>>>>>> #{params}"
     @enroll.student = current_student || Student.find_by(student_id: params[:student_id])
     @enroll.course_id = params[:course_id]
 
