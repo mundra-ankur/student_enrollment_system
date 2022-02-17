@@ -34,6 +34,9 @@
         <% else %>
           <% if admin_signed_in? %>
             <li class="nav-item">
+              <a class="nav-link active">Role: <u>Admin</u> (<%= current_admin.name %>)</a>
+            </li>
+            <li class="nav-item">
               <%= link_to "Edit Profile", edit_admin_registration_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
@@ -41,12 +44,18 @@
             </li>
           <% elsif instructor_signed_in? %>
             <li class="nav-item">
+              <a class="nav-link active">Role: <b><i>Instructor</i></b> (<%= current_instructor.name %>)</a>
+            </li>
+            <li class="nav-item">
               <%= link_to "Edit Profile", edit_instructor_registration_path, class: "nav-link" %>
             </li>
             <li class="nav-item">
               <%= link_to 'Sign Out', destroy_instructor_session_path, method: :delete, data: { turbo_method: :delete }, class: 'nav-link' %>
             </li>
           <% elsif student_signed_in? %>
+            <li class="nav-item">
+              <a class="nav-link active">Role: <b>Student</b> (<%= current_student.name %>)</a>
+            </li>
             <li class="nav-item">
               <%= link_to "Edit Profile", edit_student_registration_path, class: "nav-link" %>
             </li>

@@ -15,8 +15,10 @@ class CoursesController < ApplicationController
   end
 
   def enrolled
-    course_enrolled_students = Enroll.where(course_id: params[:id]).pluck(:student_id)
+    course_enrolled_students = Enroll.where(course_id: params[:id], waitlist: nil).pluck(:student_id)
+    course_wait_listed_students = Enroll.where(course_id: params[:id], waitlist: 'TRUE').pluck(:student_id)
     @enrolled_students = Student.where(student_id: course_enrolled_students)
+    @wait_listed_students = Student.where(student_id: course_wait_listed_students)
   end
 
   def enroll
