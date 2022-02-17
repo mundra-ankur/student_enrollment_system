@@ -1,5 +1,15 @@
 # Student Enrollment System
 
+Deployed Application: https://project-2-team-2679.herokuapp.com/ 
+
+Repository Link: https://github.ncsu.edu/amundra/Student-Enrollment-System
+
+Admin Credentials:
+
+**Email**: admin@example.com
+
+**Password**: admin123
+
 This repo is for a Student Enrollment System that can be used in schools. It provides the following features:
 - Student, Instructor log in
 - Students can enroll in, drop courses
@@ -15,6 +25,45 @@ Shruti Satish Magai (smagai@ncsu.edu)
 
 Sri Athithya Kruth Babu (sbabu@ncsu.edu)
 
+## Instructors
+
+The instructor page allows instructors to log in using their credentials or sign up by providing their information. 
+
+Once they sign in, they have the following capabilities in the system:
+- Creating a new course with a time and room number of their choice, and other options like capacity of the course, number of waitlisted seats etc
+- Adding students to their course 
+- Viewing enrolled and waitlisted students in their courses
+- Removing students from their course
+- Edit their personal information apart from email address
+- Instructors can remove the courses they have created, and this causes all the students enrolled in the course to drop the course automatically.
+
+## Students
+
+The student page allows students to log in using their credentials or sign up by providing their information. 
+
+Once they sign in, they have the following capabilities in the system:
+- Students can enroll for open courses, or get themselves waitlisted for certain courses with the option to do so
+- Students can drop courses they are no longer interested in
+- Students dropping courses with a waitlist option means the waitlisted students automatically get enrolled in the order they joined the waitlist
+- Students can update their personal information apart from email address and student ID. 
+
+## Administrator(Admin)
+
+The admin can log in to the application with following information:
+Admin Credentials:
+
+**Email**: admin@example.com
+
+**Password**: admin123
+
+Admins have the following capabilities in the system:
+
+- Admins can add new students or instructors.
+- Admins can remove students or instructors.
+- Admins can view all students, courses, enrollments, instructors in the system.
+- Admins can add/edit/delete courses created by instructors, in which the courses created by the instructor are also removed, and enrollments for their courses and cancelled.
+- Admins can add students to courses, or remove them. 
+
 ## Admin Credentials
 These are the admin credentials provided by default when the application is launched.
 
@@ -24,9 +73,11 @@ These are the admin credentials provided by default when the application is laun
 
 ## How to Test Features
 
+Please go to the deployed web application. You can create both instructors and users there, and both require passwords to log in to the application.
+
 Please create instructors first by clicking on "Instructor" on the top of the web app. Using the instructor, you can create courses for the application.
 
-Then please create students who can be enrolled in the courses, and dropped later depending on the requirements.
+Then create students who can be enrolled in the courses, and dropped later depending on the requirements.
 
 ## Edge-cases 
 - Admin deletes course taken by several students.
