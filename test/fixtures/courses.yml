@@ -8,7 +8,7 @@ one:
   weekday2: MyString
   start_time: 2022-02-13 15:07:02
   end_time: 2022-02-13 15:07:02
-  code: MyString
+  code: CSC505
   capacity: 1
   waitlist_capacity: 1
   status: MyString
@@ -23,7 +23,7 @@ two:
   weekday2: MyString
   start_time: 2022-02-13 15:07:02
   end_time: 2022-02-13 15:07:02
-  code: MyString
+  code: CSC510
   capacity: 1
   waitlist_capacity: 1
   status: MyString

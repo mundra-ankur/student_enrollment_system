@@ -5,6 +5,7 @@ ruby '3.0.0'
 gem 'actionpack', '>= 7.0.2.2'
 gem 'bcrypt', '~> 3.1.7'
 gem 'bootsnap', require: false
+gem 'byebug'
 gem 'devise', '~> 4.8'
 gem 'importmap-rails'
 gem 'pg', '~> 1.3'
@@ -24,6 +25,7 @@ group :development do
 end
 
 group :test do
+  gem 'rails-controller-testing'
   gem 'capybara'
   gem 'selenium-webdriver'
   gem 'webdrivers'
