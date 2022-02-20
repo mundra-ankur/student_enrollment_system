@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[show edit update destroy enrolled enroll]
-  before_action :authenticate_instructor?
+  before_action :authenticate_instructor?, except: [:show]
 
   # GET /courses
   def index
@@ -15,8 +15,8 @@ class CoursesController < ApplicationController
   end
 
   def enrolled
-    course_enrolled_students = Enroll.where(course_id: params[:id], waitlist: nil).pluck(:student_id)
-    course_wait_listed_students = Enroll.where(course_id: params[:id], waitlist: 'TRUE').pluck(:student_id)
+    course_enrolled_students = Enroll.where(course_id: params[:id], waitlist: false).pluck(:student_id)
+    course_wait_listed_students = Enroll.where(course_id: params[:id], waitlist: true).pluck(:student_id)
     @enrolled_students = Student.where(student_id: course_enrolled_students)
     @wait_listed_students = Student.where(student_id: course_wait_listed_students)
   end

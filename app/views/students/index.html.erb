@@ -9,7 +9,7 @@
     <th scope="col">Time</th>
     <th scope="col">Instructor</th>
     <th scope="col">Status</th>
-    <th scope="col">Capacity</th>
+    <th scope="col">Seats Available</th>
     <th scope="col">Waitlist Capacity</th>
     <th colspan="1"></th>
   </tr>
@@ -24,9 +24,9 @@
       <td><%= course.formatted_start_time %> - <%= course.formatted_end_time %></td>
       <td><%= course.instructor_name %></td>
       <td><%= course.status %></td>
-      <td><%= course.capacity %></td>
-      <td><%= course.waitlist_capacity %></td>
-      <td><%= button_to 'Enroll', enrolls_path(:student_id => @student.id, :course_id => course.code), method: :post, class: 'btn btn-outline-primary' %></td>
+      <td><%= course.capacity - course.enrolled %></td>
+      <td><%= course.waitlist_capacity - course.wait_listed %></td>
+      <td><%= button_to 'Enroll', enrolls_path(student_id: @student.student_id, course_id: course.code), method: :post, class: 'btn btn-outline-primary' %></td>
     </tr>
   <% end %>
   </tbody>
@@ -56,7 +56,7 @@
       <td><%= course.weekday1 %> <%= course.weekday2 %></td>
       <td><%= course.formatted_start_time %> - <%= course.formatted_end_time %></td>
       <td><%= course.room %></td>
-      <td><%= link_to 'Drop', Enroll.where(:student_id => @student.id, :course_id => course.code).first, method: :delete,
+      <td><%= link_to 'Drop', Enroll.where(student_id: @student.id, course_id: course.code).first, method: :delete,
                       data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %></td>
     </tr>
   <% end %>
@@ -87,7 +87,7 @@
       <td><%= course.weekday1 %> <%= course.weekday2 %></td>
       <td><%= course.formatted_start_time %> - <%= course.formatted_end_time %></td>
       <td><%= course.room %></td>
-      <td><%= link_to 'Drop', Enroll.where(:student_id => @student.id, :course_id => course.code).first, method: :delete,
+      <td><%= link_to 'Drop', Enroll.where(student_id: @student.id, course_id: course.code).first, method: :delete,
                       data: { turbo_method: :delete, turbo_confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %></td>
     </tr>
   <% end %>

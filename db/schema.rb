@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_02_16_200343) do
+ActiveRecord::Schema[7.0].define(version: 2022_02_20_184051) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -44,6 +44,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_16_200343) do
     t.bigint "instructor_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "enrolled", default: 0
+    t.integer "wait_listed", default: 0
     t.index ["code"], name: "index_courses_on_code", unique: true
     t.index ["instructor_id"], name: "index_courses_on_instructor_id"
   end
@@ -51,9 +53,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_16_200343) do
   create_table "enrolls", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "course_id"
-    t.string "student_id"
-    t.string "waitlist"
+    t.string "course_id", null: false
+    t.string "student_id", null: false
+    t.boolean "waitlist", default: false
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -89,6 +91,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_02_16_200343) do
   end
 
   add_foreign_key "courses", "instructors"
-  add_foreign_key "enrolls", "courses", primary_key: "code"
-  add_foreign_key "enrolls", "students", primary_key: "student_id"
+  add_foreign_key "enrolls", "courses", primary_key: "code", on_delete: :cascade
+  add_foreign_key "enrolls", "students", primary_key: "student_id", on_delete: :cascade
 end
