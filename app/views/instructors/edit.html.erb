@@ -4,7 +4,7 @@
   </div>
   <div class="card-body">
     <%= form_with(model: @instructor, local: true) do |f| %>
-      <%= render "instructors/shared/error_messages", resource: @instructor %>
+      <%= render "home/error_messages", resource: @instructor %>
       <div class="row mb-3">
         <div class="col-sm-6">
           <%= f.text_field :name, autofocus: true, class: "form-control", placeholder: 'Name', required: true %>
