@@ -4,7 +4,7 @@ class InstructorsController < ApplicationController
   before_action :authenticate_admin!, except: %i[index]
 
   def index
-    @courses = (C ourse.where(instructor_id: current_instructor.id) unless current_instructor.id.nil?)
+    @courses = (Course.where(instructor_id: current_instructor.id) unless current_instructor.id.nil?)
   end
 
   def show; end

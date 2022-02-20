@@ -6,9 +6,9 @@
 #
 one: {
        name: student1,
-       student_id: student1,
+       student_id: 1,
        dob: 11/05/1997,
-       phone: 12121212121,
+       phone: 1213121212,
        major: csc,
        email: student@ncsu.edu
 }
@@ -16,9 +16,9 @@ one: {
 #
 two: {
   name: student2,
-  student_id: student2,
+  student_id: 2,
   dob: 11/05/1997,
-  phone: 121221212121,
+  phone: 1212121212,
   major: csc,
   email: student2@ncsu.edu
 }
