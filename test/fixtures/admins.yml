@@ -10,10 +10,4 @@ one: {
        encrypted_password: 12345
 }
 # column: value
-#
-two: {
-       email: "admin1@example.com",
-       phone: 12345678910,
-       encrypted_password: 12345
-}
 # column: value
