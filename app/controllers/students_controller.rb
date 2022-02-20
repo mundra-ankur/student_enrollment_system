@@ -4,14 +4,14 @@ class StudentsController < ApplicationController
   before_action :authenticate_student?, except: [:enrolled_courses]
 
   def index
-    @student = current_student || Student.find_by(student_id: params[:id])
+    @student = current_student || Student.find_by(student_id: params[:student_id])
     if @student.nil?
-      redirect_back fallback_location: admin_students_path, notice: "Student #{params[:id]} not there!"
+      redirect_back fallback_location: admin_students_path, notice: "Student #{params[:student_id]} not there!"
     else
       enrolled_course_codes = Enroll.where(student_id: @student.student_id).pluck(:course_id)
       @courses = Course.where.not(code: enrolled_course_codes)
-      @enrolled_courses = Course.where(code: Enroll.where(student_id: @student[:id], waitlist: nil).pluck(:course_id))
-      @waitlistedcourses = Course.where(code: Enroll.where(student_id: @student[:id], waitlist: 'TRUE').pluck(:course_id))
+      @enrolled_courses = Course.where(code: Enroll.where(student_id: @student[:id], waitlist: false).pluck(:course_id))
+      @waitlistedcourses = Course.where(code: Enroll.where(student_id: @student[:id], waitlist: true).pluck(:course_id))
     end
   end
 
@@ -25,7 +25,7 @@ class StudentsController < ApplicationController
   end
 
   def edit
-    @student = Student.find(params[:id])
+    @student = Student.find(params[:student_id])
   end
 
   def update
@@ -50,8 +50,8 @@ class StudentsController < ApplicationController
 
   # Use callbacks to share common setup or constraints between actions.
   def set_student
-    @student = current_student || Student.find_by(student_id: params[:id])
-    redirect_back fallback_location: admin_students_path, notice: "Student with id #{params[:id]} not there!" if @student.nil?
+    @student = current_student || Student.find_by(student_id: params[:student_id])
+    redirect_back fallback_location: admin_students_path, notice: "Student with id #{params[:student_id]} not there!" if @student.nil?
   end
 
   # Only allow a list of trusted parameters through.
