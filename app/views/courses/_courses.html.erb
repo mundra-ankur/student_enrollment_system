@@ -23,12 +23,12 @@
         <td><%= course.weekday1 %> <%= course.weekday2 %></td>
         <td><%= course.formatted_start_time %> - <%= course.formatted_end_time %></td>
         <td><%= course.instructor_name %></td>
-        <td><%= course.status %></td>
+        <td style="color: lightcoral"><%= course.status %></td>
         <td><%= course.capacity - course.enrolled %> of <%= course.capacity %></td>
         <td><%= course.waitlist_capacity - course.wait_listed %> of <%= course.waitlist_capacity %></td>
         <td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-outline-primary' %></td>
         <td><%= link_to 'Delete', course, method: :delete, data: { turbo_method: :delete,
-                                                                   turbo_confirm: "Are you sure?" }, class: 'btn btn-outline-danger btn-sm' %></td>
+                                                                   turbo_confirm: "Are you sure?" }, class: 'btn btn-outline-danger' %></td>
       </tr>
     <% end %>
     </tbody>

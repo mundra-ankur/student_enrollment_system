@@ -23,9 +23,9 @@
         <td><%= course.room %></td>
         <td><%= course.weekday1 %> <%= course.weekday2 %></td>
         <td><%= course.formatted_start_time %> - <%= course.formatted_end_time %></td>
-        <td><%= course.status %></td>
-        <td><%= course.capacity %></td>
-        <td><%= course.waitlist_capacity %></td>
+        <td style="color: lightcoral"><%= course.status %></td>
+        <td><%= course.capacity - course.enrolled %> of <%= course.capacity %></td>
+        <td><%= course.waitlist_capacity - course.wait_listed %> of <%= course.waitlist_capacity %></td>
         <td><%= link_to 'Enroll', course_enroll_students_path(id: course.code), class: 'btn btn-outline-success' %></td>
         <td><%= link_to 'Enrolled', course_enrolled_students_path(id: course.code), class: 'btn btn-outline-primary' %></td>
         <td><%= link_to 'Edit', edit_course_path(course), class: 'btn btn-outline-info' %></td>
