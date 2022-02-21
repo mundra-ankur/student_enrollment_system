@@ -38,6 +38,9 @@ class CoursesController < ApplicationController
 
   # GET /courses/1/edit
   def edit
+    if current_instructor && @course.instructor != current_instructor
+      redirect_to courses_url, notice: "You are not authorised to edit course #{params[:id]}!"
+    end
     @instructor = current_instructor
     @instructors = Instructor.all
   end

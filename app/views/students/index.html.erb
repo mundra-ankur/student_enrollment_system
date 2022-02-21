@@ -23,7 +23,7 @@
       <td><%= course.weekday1 %> <%= course.weekday2 %></td>
       <td><%= course.formatted_start_time %> - <%= course.formatted_end_time %></td>
       <td><%= course.instructor_name %></td>
-      <td><%= course.status %></td>
+      <td style="color: lightcoral"><%= course.status %></td>
       <td><%= course.capacity - course.enrolled %></td>
       <td><%= course.waitlist_capacity - course.wait_listed %></td>
       <td><%= button_to 'Enroll', enrolls_path(student_id: @student.student_id, course_id: course.code), method: :post, class: 'btn btn-outline-primary' %></td>
