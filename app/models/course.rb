@@ -13,11 +13,10 @@ class Course < ApplicationRecord
   validates :weekday1, presence: true, comparison: { other_than: :weekday2 }
   validates :start_time, presence: true
   validates :end_time, presence: true, comparison: { greater_than: :start_time }
-  validates :capacity, presence: true,
-            numericality: { only_integer: true, greater_than: :current_capacity, message: 'Capacity can only be increased' }
-  validates :waitlist_capacity, presence: true,
-            numericality: { only_integer: true, greater_than_or_equal_to: :waitlist_capacity,
-                            message: 'Wait list capacity can only be increased' }
+  validates :capacity, presence: true, numericality: { only_integer: true, greater_than: :current_capacity, message: 'can only be increased' }
+  validates :waitlist_capacity, presence: true, numericality:
+    { only_integer: true, greater_than_or_equal_to: :waitlist_capacity_was,
+      message: 'can only be increased' }
 
   def formatted_start_time
     start_time.strftime('%H:%M')
@@ -28,8 +27,8 @@ class Course < ApplicationRecord
   end
 
   def current_capacity
-    return 1 if capacity.zero?
+    return 0 if capacity_was.zero?
 
-    capacity - 1
+    capacity_was - 1
   end
 end
