@@ -1,6 +1,6 @@
 # Student Enrollment System
 
-Deployed Application: https://project-2-team-2679.herokuapp.com/ 
+Deployed Application: https://project-2-team-2679-3.herokuapp.com/
 
 Repository Link: https://github.ncsu.edu/amundra/Student-Enrollment-System
 
