@@ -28,10 +28,4 @@ class Course < ApplicationRecord
   def formatted_end_time
     end_time.strftime('%H:%M')
   end
-
-  def current_capacity
-    return 0 if capacity.zero?
-
-    capacity - 1
-  end
 end
