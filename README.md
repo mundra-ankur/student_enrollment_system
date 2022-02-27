@@ -25,6 +25,14 @@ Shruti Satish Magai (smagai@ncsu.edu)
 
 Sri Athithya Kruth Babu (sbabu@ncsu.edu)
 
+### Rails Model Dependency Diagram
+
+![admin](https://media.github.ncsu.edu/user/22729/files/01337b6b-5373-40e8-b655-21c51f2c72f3)
+
+### Database Schema
+![development](https://media.github.ncsu.edu/user/22729/files/0e2ebb1c-a911-4600-9277-c69dbd54e2a5)
+
+
 ## Instructors
 
 The instructor page allows instructors to log in using their credentials or sign up by providing their information. 
@@ -63,13 +71,6 @@ Admins have the following capabilities in the system:
 - Admins can view all students, courses, enrollments, instructors in the system.
 - Admins can add/edit/delete courses created by instructors, in which the courses created by the instructor are also removed, and enrollments for their courses and cancelled.
 - Admins can add students to courses, or remove them. 
-
-## Admin Credentials
-These are the admin credentials provided by default when the application is launched.
-
-**Email**: admin@example.com
-
-**Password**: admin123
 
 ## How to Test Features
 
